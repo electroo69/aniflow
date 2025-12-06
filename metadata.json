@@ -1,0 +1,5 @@
+{
+  "name": "AniFlow",
+  "description": "A comprehensive Anime and Manga discovery platform powered by Jikan API. Features top rankings, seasonal charts, detailed character info, and advanced search capabilities.",
+  "requestFramePermissions": []
+}
