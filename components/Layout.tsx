@@ -43,7 +43,7 @@ export const Layout = () => {
     const delayDebounceFn = setTimeout(() => {
       // Only auto-navigate if the query is not empty and has changed
       // and prevent looping if we are already on the page with the same query
-      const currentQ = new URLSearchParams(window.location.hash.split('?')[1]).get('q') || '';
+      const currentQ = new URLSearchParams(window.location.search).get('q') || '';
       
       if (searchQuery.trim() && searchQuery !== currentQ) {
          navigate(`/search?q=${encodeURIComponent(searchQuery)}`, { replace: true });
@@ -150,7 +150,7 @@ export const Layout = () => {
             <AdBanner 
               width={728} 
               height={90} 
-              dataKey="c50bb328670da58a01a9ba5ef5827975"
+              dataKey="81578b19d83a4f1759aa884de44e3af4"
               className="my-6"
             />
           </div>
@@ -160,7 +160,7 @@ export const Layout = () => {
             <AdBanner 
               width={320} 
               height={50} 
-              dataKey="d4bc816320110b1e33cd70cd98473339" 
+              dataKey="253051113717debd95173954d883edf4" 
               className="my-6"
             />
           </div>

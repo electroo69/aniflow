@@ -79,7 +79,7 @@ export const Home = () => {
               {(index + 1) % 5 === 0 && (
                  <div className="min-w-[160px] md:min-w-[200px] aspect-[2/3] snap-start flex items-center justify-center bg-slate-900 rounded-xl overflow-hidden relative border border-slate-800">
                     <div className="transform scale-[0.55] md:scale-[0.75] origin-center">
-                        <AdBanner width={300} height={250} dataKey="779520aa602be4ce8eca6a1d6012e88a" />
+                        <AdBanner width={300} height={250} dataKey="edcee0617b46e89591f39e8a7b1e13a9" />
                     </div>
                  </div>
               )}
@@ -94,14 +94,14 @@ export const Home = () => {
            <AdBanner 
              width={728} 
              height={90} 
-             dataKey="c50bb328670da58a01a9ba5ef5827975"
+             dataKey="81578b19d83a4f1759aa884de44e3af4"
            />
         </div>
         <div className="md:hidden block">
            <AdBanner 
              width={320} 
              height={50} 
-             dataKey="d4bc816320110b1e33cd70cd98473339"
+             dataKey="253051113717debd95173954d883edf4"
            />
         </div>
       </div>
@@ -116,7 +116,7 @@ export const Home = () => {
                   {(index + 1) % 5 === 0 && (
                     <div className="aspect-[2/3] flex items-center justify-center bg-slate-900 rounded-xl border border-slate-800 overflow-hidden relative">
                        <div className="transform scale-[0.55] md:scale-[0.75] origin-center">
-                          <AdBanner width={300} height={250} dataKey="779520aa602be4ce8eca6a1d6012e88a" />
+                          <AdBanner width={300} height={250} dataKey="edcee0617b46e89591f39e8a7b1e13a9" />
                        </div>
                     </div>
                   )}
@@ -137,7 +137,7 @@ export const Home = () => {
                {(index + 1) % 5 === 0 && (
                  <div className="min-w-[160px] md:min-w-[200px] aspect-[2/3] snap-start flex items-center justify-center bg-slate-900 rounded-xl overflow-hidden relative border border-slate-800">
                     <div className="transform scale-[0.55] md:scale-[0.75] origin-center">
-                        <AdBanner width={300} height={250} dataKey="779520aa602be4ce8eca6a1d6012e88a" />
+                        <AdBanner width={300} height={250} dataKey="edcee0617b46e89591f39e8a7b1e13a9" />
                     </div>
                  </div>
               )}

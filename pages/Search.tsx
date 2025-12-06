@@ -148,7 +148,7 @@ export const Search = () => {
         nodes.push(
           <div key={`ad-${index}`} className="aspect-[2/3] flex items-center justify-center bg-slate-900 rounded-xl border border-slate-800 overflow-hidden relative">
              <div className="transform scale-[0.55] md:scale-[0.75] origin-center">
-                <AdBanner width={300} height={250} dataKey="779520aa602be4ce8eca6a1d6012e88a" />
+                <AdBanner width={300} height={250} dataKey="edcee0617b46e89591f39e8a7b1e13a9" />
              </div>
           </div>
         );
