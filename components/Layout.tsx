@@ -148,8 +148,11 @@ export const Layout = () => {
         </header>
 
         <div className="p-4 md:p-8 flex-1 overflow-y-auto" id="scroll-container">
-          {/* Desktop Leaderboard Ad (728x90) */}
-          <div className="hidden md:flex justify-center mb-6">
+          {/* Content loads first for better LCP */}
+          <Outlet />
+
+          {/* Ads load after content */}
+          <div className="hidden md:flex justify-center mt-6">
             <AdBanner
               width={728}
               height={90}
@@ -158,8 +161,7 @@ export const Layout = () => {
             />
           </div>
 
-          {/* Mobile Leaderboard Ad (320x50) */}
-          <div className="md:hidden flex justify-center mb-6">
+          <div className="md:hidden flex justify-center mt-6">
             <AdBanner
               width={320}
               height={50}
@@ -167,8 +169,6 @@ export const Layout = () => {
               className="my-6"
             />
           </div>
-
-          <Outlet />
         </div>
       </main>
     </div>

@@ -5,6 +5,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <!-- CRITICAL: Preconnect hints MUST be first for LCP improvement -->
+  <link rel="preconnect" href="https://cdn.myanimelist.net" crossorigin />
+  <link rel="preconnect" href="https://api.jikan.moe" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="dns-prefetch" href="https://cdn.myanimelist.net" />
+  <link rel="dns-prefetch" href="https://api.jikan.moe" />
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+
   <!-- Primary Meta Tags -->
   <title>AniFlow - Discover Anime and Manga</title>
   <meta name="title" content="AniFlow - Discover Anime and Manga" />
@@ -37,18 +47,6 @@
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-  <!-- DNS Prefetch and Preconnect for performance -->
-  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-  <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-  <link rel="dns-prefetch" href="https://api.jikan.moe" />
-  <link rel="dns-prefetch" href="https://cdn.myanimelist.net" />
-  <link rel="dns-prefetch" href="https://www.highperformanceformat.com" />
-  <!-- Preconnect to critical origins for LCP improvement -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preconnect" href="https://api.jikan.moe" crossorigin />
-  <link rel="preconnect" href="https://cdn.myanimelist.net" crossorigin />
-  <link rel="preconnect" href="https://www.highperformanceformat.com" crossorigin />
 
   <!-- Preload critical font -->
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"

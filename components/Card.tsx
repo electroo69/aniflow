@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Star, Heart } from 'lucide-react';
 import { Anime, Manga, Character } from '../types';
@@ -13,23 +13,33 @@ interface CardProps {
 
 export const Card: React.FC<CardProps> = ({ item, onClick, priority = false }) => {
   const isCharacter = 'name' in item;
+  const [isHighResLoaded, setIsHighResLoaded] = useState(false);
+  const highResRef = useRef<HTMLImageElement>(null);
 
   let linkPath = '#';
   let title = '';
 
-  // Robust image fallback logic: Large WebP -> Large JPG -> WebP -> JPG
+  // Progressive image loading: Start with small, upgrade to large
   const images = item.images;
-  const imageUrl =
-    images.webp?.large_image_url ||
-    images.jpg?.large_image_url ||
+
+  // Small image for fast initial load (~225x350px, ~20-30KB)
+  const smallImageUrl =
     images.webp?.image_url ||
     images.jpg?.image_url;
+
+  // Large image for high quality after initial load (~400x600px, ~50-60KB)
+  const largeImageUrl =
+    images.webp?.large_image_url ||
+    images.jpg?.large_image_url ||
+    smallImageUrl; // Fallback to small if no large available
+
+  // Use small image initially, upgrade to large after small is visible
+  const [currentSrc, setCurrentSrc] = useState(smallImageUrl);
 
   let subtitle = '';
 
   if (isCharacter) {
     const char = item as Character;
-    // Link to search for the character specifically or just keep them in the ecosystem
     linkPath = `/search?q=${encodeURIComponent(char.name)}`;
     title = char.name;
     subtitle = `Favorites: ${char.favorites ? char.favorites.toLocaleString() : 0}`;
@@ -37,11 +47,22 @@ export const Card: React.FC<CardProps> = ({ item, onClick, priority = false }) =
     const resource = item as Anime | Manga;
     const isMangaType = resource.type === 'Manga' || resource.type === 'Novel' || resource.type === 'Manhwa';
     const resourceTitle = resource.title_english || resource.title;
-    // Generate SEO-friendly URL with slug
     linkPath = createSeoUrl(isMangaType ? 'manga' : 'anime', resource.mal_id, resourceTitle);
     title = resourceTitle;
     subtitle = `${resource.type} • ${resource.year || '?'}`;
   }
+
+  // Progressive loading: After small image loads, start loading high-res in background
+  useEffect(() => {
+    if (smallImageUrl && largeImageUrl && smallImageUrl !== largeImageUrl) {
+      const img = new Image();
+      img.src = largeImageUrl;
+      img.onload = () => {
+        setCurrentSrc(largeImageUrl);
+        setIsHighResLoaded(true);
+      };
+    }
+  }, [smallImageUrl, largeImageUrl]);
 
   const handleClick = (e: React.MouseEvent) => {
     if (onClick) {
@@ -53,14 +74,17 @@ export const Card: React.FC<CardProps> = ({ item, onClick, priority = false }) =
   return (
     <Link to={linkPath} onClick={handleClick} className="group relative flex flex-col gap-2 w-full">
       <div className="relative aspect-[2/3] overflow-hidden rounded-xl bg-slate-800 shadow-md transition-all duration-300 group-hover:shadow-blue-500/20 group-hover:shadow-2xl">
+        {/* Main image - starts with small, upgrades to large */}
         <img
-          src={imageUrl}
+          src={currentSrc}
           alt={title}
-          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+          className={`h-full w-full object-cover transition-all duration-500 group-hover:scale-110 ${isHighResLoaded ? 'opacity-100' : 'opacity-100'
+            }`}
           loading={priority ? "eager" : "lazy"}
           fetchPriority={priority ? "high" : "auto"}
           decoding={priority ? "sync" : "async"}
         />
+
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
 
         <div className="absolute bottom-0 left-0 right-0 p-3 translate-y-2 group-hover:translate-y-0 transition-transform">

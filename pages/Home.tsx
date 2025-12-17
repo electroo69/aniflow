@@ -80,18 +80,9 @@ export const Home = () => {
         <SectionHeader title="Trending Now" icon={Flame} link="/top" />
         <HorizontalScroll>
           {topAnime.map((item, index) => (
-            <React.Fragment key={item.mal_id}>
-              <div className="min-w-[160px] md:min-w-[200px] snap-start">
-                <Card item={item} priority={index < 4} />
-              </div>
-              {(index + 1) % 5 === 0 && (
-                <div className="min-w-[160px] md:min-w-[200px] aspect-[2/3] snap-start flex items-center justify-center bg-slate-900 rounded-xl overflow-hidden relative border border-slate-800">
-                  <div className="transform scale-[0.55] md:scale-[0.75] origin-center">
-                    <AdBanner width={300} height={250} dataKey="edcee0617b46e89591f39e8a7b1e13a9" />
-                  </div>
-                </div>
-              )}
-            </React.Fragment>
+            <div key={item.mal_id} className="min-w-[160px] md:min-w-[200px] snap-start">
+              <Card item={item} priority={index < 4} />
+            </div>
           ))}
         </HorizontalScroll>
       </section>
