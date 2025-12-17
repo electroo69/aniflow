@@ -5,8 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "npx tsx scripts/generate-sitemap.ts",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "generate-sitemap": "npx tsx scripts/generate-sitemap.ts"
   },
   "dependencies": {
     "react-dom": "^19.2.1",

@@ -5,13 +5,17 @@ interface SEOProps {
   description?: string;
   image?: string;
   type?: 'website' | 'article';
+  jsonLd?: object | object[];
+  canonicalUrl?: string;
 }
 
-export const SEO: React.FC<SEOProps> = ({ 
-  title, 
-  description = "Discover your next favorite anime and manga on AniFlow. Browse top charts, seasonal releases, and find your next obsession.", 
-  image = "/og-image.jpg", 
-  type = 'website' 
+export const SEO: React.FC<SEOProps> = ({
+  title,
+  description = "Discover your next favorite anime and manga on AniFlow. Browse top charts, seasonal releases, and find your next obsession.",
+  image = "/og-image.jpg",
+  type = 'website',
+  jsonLd,
+  canonicalUrl
 }) => {
   const siteTitle = "AniFlow";
   const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
@@ -44,13 +48,13 @@ export const SEO: React.FC<SEOProps> = ({
 
     // Update Meta Tags
     setMeta('description', description);
-    
+
     // Open Graph
     setMeta('og:type', type, 'property');
     setMeta('og:title', fullTitle, 'property');
     setMeta('og:description', description, 'property');
     setMeta('og:image', image, 'property');
-    setMeta('og:url', window.location.href, 'property');
+    setMeta('og:url', canonicalUrl || window.location.href, 'property');
     setMeta('og:site_name', siteTitle, 'property');
 
     // Twitter
@@ -60,9 +64,32 @@ export const SEO: React.FC<SEOProps> = ({
     setMeta('twitter:image', image, 'name');
 
     // Canonical
-    setLink('canonical', window.location.href);
+    setLink('canonical', canonicalUrl || window.location.href);
 
-  }, [fullTitle, description, image, type, siteTitle]);
+    // JSON-LD Structured Data
+    // Remove any existing JSON-LD scripts we've added
+    const existingScripts = document.querySelectorAll('script[data-seo-jsonld]');
+    existingScripts.forEach(script => script.remove());
+
+    // Add new JSON-LD if provided
+    if (jsonLd) {
+      const jsonLdArray = Array.isArray(jsonLd) ? jsonLd : [jsonLd];
+      jsonLdArray.forEach((data, index) => {
+        const script = document.createElement('script');
+        script.type = 'application/ld+json';
+        script.setAttribute('data-seo-jsonld', `${index}`);
+        script.textContent = JSON.stringify(data);
+        document.head.appendChild(script);
+      });
+    }
+
+    // Cleanup function to remove JSON-LD when component unmounts
+    return () => {
+      const scripts = document.querySelectorAll('script[data-seo-jsonld]');
+      scripts.forEach(script => script.remove());
+    };
+
+  }, [fullTitle, description, image, type, siteTitle, jsonLd, canonicalUrl]);
 
   return null;
 };

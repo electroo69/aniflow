@@ -7,6 +7,9 @@ import { ChevronRight, Flame, Calendar, TrendingUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { AdBanner } from '../components/AdBanner';
 import { SEO } from '../components/SEO';
+import { generateWebsiteJsonLd } from '../utils/seo';
+
+const BASE_URL = 'https://aniflow.gyatbox.space'; // Update this to your actual domain
 
 const SectionHeader = ({ title, icon: Icon, link }: { title: string, icon: any, link: string }) => (
   <div className="flex items-center justify-between mb-6">
@@ -28,6 +31,9 @@ const HorizontalScroll = ({ children }: { children?: React.ReactNode }) => (
   </div>
 );
 
+// Generate website JSON-LD for homepage
+const websiteJsonLd = generateWebsiteJsonLd(BASE_URL);
+
 export const Home = () => {
   const [topAnime, setTopAnime] = useState<Anime[]>([]);
   const [seasonNow, setSeasonNow] = useState<Anime[]>([]);
@@ -44,7 +50,7 @@ export const Home = () => {
           jikanApi.getSeasonNow(),
           jikanApi.getUpcomingAnime(),
         ]);
-        
+
         setTopAnime(topRes.data.slice(0, 10));
         setSeasonNow(seasonRes.data.slice(0, 10));
         setUpcoming(upcomingRes.data.slice(0, 10));
@@ -62,11 +68,13 @@ export const Home = () => {
 
   return (
     <div className="space-y-12">
-      <SEO 
-        title="AniFlow" 
-        description="Your ultimate destination for discovering Anime and Manga. Browse top charts, seasonal releases, and find your next obsession." 
+      <SEO
+        title="AniFlow"
+        description="Your ultimate destination for discovering Anime and Manga. Browse top charts, seasonal releases, and find your next obsession."
+        jsonLd={websiteJsonLd}
+        canonicalUrl={BASE_URL}
       />
-      
+
       {/* Hero / Top Section */}
       <section>
         <SectionHeader title="Trending Now" icon={Flame} link="/top" />
@@ -77,11 +85,11 @@ export const Home = () => {
                 <Card item={item} />
               </div>
               {(index + 1) % 5 === 0 && (
-                 <div className="min-w-[160px] md:min-w-[200px] aspect-[2/3] snap-start flex items-center justify-center bg-slate-900 rounded-xl overflow-hidden relative border border-slate-800">
-                    <div className="transform scale-[0.55] md:scale-[0.75] origin-center">
-                        <AdBanner width={300} height={250} dataKey="edcee0617b46e89591f39e8a7b1e13a9" />
-                    </div>
-                 </div>
+                <div className="min-w-[160px] md:min-w-[200px] aspect-[2/3] snap-start flex items-center justify-center bg-slate-900 rounded-xl overflow-hidden relative border border-slate-800">
+                  <div className="transform scale-[0.55] md:scale-[0.75] origin-center">
+                    <AdBanner width={300} height={250} dataKey="edcee0617b46e89591f39e8a7b1e13a9" />
+                  </div>
+                </div>
               )}
             </React.Fragment>
           ))}
@@ -91,18 +99,18 @@ export const Home = () => {
       {/* Ad: Responsive Leaderboard (728x90 Desktop / 320x50 Mobile) */}
       <div className="flex justify-center my-6">
         <div className="hidden md:block">
-           <AdBanner 
-             width={728} 
-             height={90} 
-             dataKey="81578b19d83a4f1759aa884de44e3af4"
-           />
+          <AdBanner
+            width={728}
+            height={90}
+            dataKey="81578b19d83a4f1759aa884de44e3af4"
+          />
         </div>
         <div className="md:hidden block">
-           <AdBanner 
-             width={320} 
-             height={50} 
-             dataKey="253051113717debd95173954d883edf4"
-           />
+          <AdBanner
+            width={320}
+            height={50}
+            dataKey="253051113717debd95173954d883edf4"
+          />
         </div>
       </div>
 
@@ -110,23 +118,23 @@ export const Home = () => {
       <section>
         <SectionHeader title="This Season" icon={Calendar} link="/seasonal" />
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 auto-rows-fr">
-            {seasonNow.map((item, index) => (
-                <React.Fragment key={item.mal_id}>
-                  <Card item={item} />
-                  {(index + 1) % 5 === 0 && (
-                    <div className="aspect-[2/3] flex items-center justify-center bg-slate-900 rounded-xl border border-slate-800 overflow-hidden relative">
-                       <div className="transform scale-[0.55] md:scale-[0.75] origin-center">
-                          <AdBanner width={300} height={250} dataKey="edcee0617b46e89591f39e8a7b1e13a9" />
-                       </div>
-                    </div>
-                  )}
-                </React.Fragment>
-            ))}
+          {seasonNow.map((item, index) => (
+            <React.Fragment key={item.mal_id}>
+              <Card item={item} />
+              {(index + 1) % 5 === 0 && (
+                <div className="aspect-[2/3] flex items-center justify-center bg-slate-900 rounded-xl border border-slate-800 overflow-hidden relative">
+                  <div className="transform scale-[0.55] md:scale-[0.75] origin-center">
+                    <AdBanner width={300} height={250} dataKey="edcee0617b46e89591f39e8a7b1e13a9" />
+                  </div>
+                </div>
+              )}
+            </React.Fragment>
+          ))}
         </div>
       </section>
 
-       {/* Upcoming Section */}
-       <section>
+      {/* Upcoming Section */}
+      <section>
         <SectionHeader title="Upcoming Hype" icon={TrendingUp} link="/seasonal" />
         <HorizontalScroll>
           {upcoming.map((item, index) => (
@@ -134,12 +142,12 @@ export const Home = () => {
               <div className="min-w-[160px] md:min-w-[200px] snap-start">
                 <Card item={item} />
               </div>
-               {(index + 1) % 5 === 0 && (
-                 <div className="min-w-[160px] md:min-w-[200px] aspect-[2/3] snap-start flex items-center justify-center bg-slate-900 rounded-xl overflow-hidden relative border border-slate-800">
-                    <div className="transform scale-[0.55] md:scale-[0.75] origin-center">
-                        <AdBanner width={300} height={250} dataKey="edcee0617b46e89591f39e8a7b1e13a9" />
-                    </div>
-                 </div>
+              {(index + 1) % 5 === 0 && (
+                <div className="min-w-[160px] md:min-w-[200px] aspect-[2/3] snap-start flex items-center justify-center bg-slate-900 rounded-xl overflow-hidden relative border border-slate-800">
+                  <div className="transform scale-[0.55] md:scale-[0.75] origin-center">
+                    <AdBanner width={300} height={250} dataKey="edcee0617b46e89591f39e8a7b1e13a9" />
+                  </div>
+                </div>
               )}
             </React.Fragment>
           ))}

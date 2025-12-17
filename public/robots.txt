@@ -1,4 +1,11 @@
 User-agent: *
 Allow: /
 
+# Sitemap location
 Sitemap: https://aniflow.gyatbox.space/sitemap.xml
+
+# Crawl-delay for being nice to the server
+Crawl-delay: 1
+
+# Disallow any API or internal routes if they exist
+Disallow: /api/

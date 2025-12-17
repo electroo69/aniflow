@@ -1,33 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AniFlow - Discover Anime and Manga</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-      body {
-        font-family: 'Inter', sans-serif;
-        background-color: #0f172a; /* Slate 950 */
-        color: #e2e8f0; /* Slate 200 */
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Primary Meta Tags -->
+  <title>AniFlow - Discover Anime and Manga</title>
+  <meta name="title" content="AniFlow - Discover Anime and Manga" />
+  <meta name="description"
+    content="Discover your next favorite anime and manga on AniFlow. Browse top charts, seasonal releases, get personalized recommendations, and find your next obsession." />
+  <meta name="keywords"
+    content="anime, manga, anime streaming, anime list, top anime, seasonal anime, anime recommendations, watch anime, read manga, anime database, myanimelist" />
+  <meta name="author" content="AniFlow" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://aniflow.gyatbox.space/" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://aniflow.gyatbox.space/" />
+  <meta property="og:title" content="AniFlow - Discover Anime and Manga" />
+  <meta property="og:description"
+    content="Discover your next favorite anime and manga on AniFlow. Browse top charts, seasonal releases, and find your next obsession." />
+  <meta property="og:image" content="https://aniflow.gyatbox.space/og-image.jpg" />
+  <meta property="og:site_name" content="AniFlow" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://aniflow.gyatbox.space/" />
+  <meta name="twitter:title" content="AniFlow - Discover Anime and Manga" />
+  <meta name="twitter:description"
+    content="Discover your next favorite anime and manga on AniFlow. Browse top charts, seasonal releases, and find your next obsession." />
+  <meta name="twitter:image" content="https://aniflow.gyatbox.space/og-image.jpg" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <!-- Preconnect to external resources -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://api.jikan.moe" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0f172a;
+      /* Slate 950 */
+      color: #e2e8f0;
+      /* Slate 200 */
+    }
+
+    /* Custom scrollbar for webkit */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #1e293b;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #475569;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #64748b;
+    }
+
+    /* Hide scrollbar for horizontal scroll but keep functionality */
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Fade in animation */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
       }
-      /* Custom scrollbar for webkit */
-      ::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
-      ::-webkit-scrollbar-track {
-        background: #1e293b; 
+    }
+
+    .animate-fadeIn {
+      animation: fadeIn 0.3s ease-out;
+    }
+  </style>
+
+  <!-- Website structured data for search engines -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "AniFlow",
+      "url": "https://aniflow.gyatbox.space",
+      "description": "Discover your next favorite anime and manga on AniFlow. Browse top charts, seasonal releases, and find your next obsession.",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://aniflow.gyatbox.space/search?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
       }
-      ::-webkit-scrollbar-thumb {
-        background: #475569; 
-        border-radius: 4px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #64748b; 
-      }
-    </style>
+    }
+    </script>
+
   <script type="importmap">
 {
   "imports": {
@@ -40,8 +132,10 @@
 }
 </script>
 </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/index.tsx"></script>
-  </body>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+
 </html>
