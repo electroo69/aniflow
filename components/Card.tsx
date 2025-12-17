@@ -7,9 +7,11 @@ import { createSeoUrl } from '../utils/seo';
 interface CardProps {
   item: Anime | Manga | Character;
   onClick?: (item: Anime | Manga | Character) => void;
+  /** Set to true for above-the-fold images to disable lazy loading and prioritize fetching */
+  priority?: boolean;
 }
 
-export const Card: React.FC<CardProps> = ({ item, onClick }) => {
+export const Card: React.FC<CardProps> = ({ item, onClick, priority = false }) => {
   const isCharacter = 'name' in item;
 
   let linkPath = '#';
@@ -55,7 +57,9 @@ export const Card: React.FC<CardProps> = ({ item, onClick }) => {
           src={imageUrl}
           alt={title}
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-          loading="lazy"
+          loading={priority ? "eager" : "lazy"}
+          fetchPriority={priority ? "high" : "auto"}
+          decoding={priority ? "sync" : "async"}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
 
@@ -97,7 +101,7 @@ export const Card: React.FC<CardProps> = ({ item, onClick }) => {
         <h3 className="font-semibold text-sm md:text-base leading-tight group-hover:text-blue-400 transition-colors line-clamp-2" title={title}>
           {title}
         </h3>
-        <p className="text-xs text-slate-500 mt-1 flex items-center gap-2">
+        <p className="text-xs text-slate-400 mt-1 flex items-center gap-2">
           {subtitle}
         </p>
       </div>

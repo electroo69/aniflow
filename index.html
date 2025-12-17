@@ -41,8 +41,14 @@
   <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
   <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
   <link rel="dns-prefetch" href="https://api.jikan.moe" />
+  <link rel="dns-prefetch" href="https://cdn.myanimelist.net" />
+  <link rel="dns-prefetch" href="https://www.highperformanceformat.com" />
+  <!-- Preconnect to critical origins for LCP improvement -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://api.jikan.moe" crossorigin />
+  <link rel="preconnect" href="https://cdn.myanimelist.net" crossorigin />
+  <link rel="preconnect" href="https://www.highperformanceformat.com" crossorigin />
 
   <!-- Preload critical font -->
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
@@ -72,7 +78,52 @@
 </head>
 
 <body>
-  <div id="root"></div>
+  <!-- Critical CSS for instant render -->
+  <style>
+    /* Critical CSS - inline for fastest First Paint */
+    body {
+      margin: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #0f172a;
+      color: #e2e8f0;
+      min-height: 100vh;
+    }
+
+    #root {
+      min-height: 100vh;
+    }
+
+    /* Loading skeleton placeholder */
+    .loading-skeleton {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: #0f172a;
+    }
+
+    .loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid #1e293b;
+      border-top-color: #3b82f6;
+      border-radius: 50%;
+      animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+  <div id="root">
+    <!-- Initial loading skeleton - replaced by React -->
+    <div class="loading-skeleton" aria-label="Loading AniFlow">
+      <div class="loading-spinner"></div>
+    </div>
+  </div>
   <script type="module" src="/index.tsx"></script>
 </body>
 

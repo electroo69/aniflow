@@ -82,7 +82,7 @@ export const Home = () => {
           {topAnime.map((item, index) => (
             <React.Fragment key={item.mal_id}>
               <div className="min-w-[160px] md:min-w-[200px] snap-start">
-                <Card item={item} />
+                <Card item={item} priority={index < 4} />
               </div>
               {(index + 1) % 5 === 0 && (
                 <div className="min-w-[160px] md:min-w-[200px] aspect-[2/3] snap-start flex items-center justify-center bg-slate-900 rounded-xl overflow-hidden relative border border-slate-800">
